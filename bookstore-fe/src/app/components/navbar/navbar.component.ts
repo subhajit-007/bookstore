@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { STRINGS } from '../../configs/strings';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 const MatModules = [
   MatToolbarModule,
   MatLabel,
-  MatFormField,
+  MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
   MatIconModule,
@@ -20,7 +20,7 @@ const MatModules = [
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [...MatModules, RouterModule],
+  imports: [...MatModules, RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
