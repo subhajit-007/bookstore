@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { STRINGS } from '../../configs/strings';
 
 @Component({
@@ -11,5 +11,7 @@ import { STRINGS } from '../../configs/strings';
 export class NavbarComponent {
   // strings to show in the component
   appStrings: any = STRINGS;
+
+  @Input() role: string = 'admin';
 
 }
