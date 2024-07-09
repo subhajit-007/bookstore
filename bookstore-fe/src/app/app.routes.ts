@@ -11,7 +11,7 @@ import { BookOwnerComponent } from './screens/book-owner/book-owner.component';
 //   { path: '**', component: PageNotFoundComponent }, // This should be the last route
 // ];
 export const routes: Routes = [
-  { path: '', redirectTo: 'user', pathMatch: 'full' },
+  { path: '', redirectTo: 'book-owner', pathMatch: 'full' },
   {
     path: 'user',
     component: CustomerComponent,

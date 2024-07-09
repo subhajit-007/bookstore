@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-order',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './manage-order.component.scss'
 })
 export class ManageOrderComponent {
+  orderId: string = '';
 
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.orderId = this.route.snapshot.paramMap.get('orderId') ?? '';
+  }
 }
