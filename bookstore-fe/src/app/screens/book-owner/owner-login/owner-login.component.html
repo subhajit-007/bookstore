@@ -1,1 +1,49 @@
-<p>owner-login works!</p>
+<section class="auth-card-container">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{
+          appStrings?.bookOwner?.loginHeaderText
+        }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-content">
+        <mat-form-field appearance="outline">
+          <!-- email input -->
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [placeholder]="appStrings?.common?.emailPlaceHolder"
+            [formControl]="email"
+            (blur)="updateErrorMessage()"
+            required
+          />
+          @if (email.invalid) {
+          <mat-error>{{ errorMessage() }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline"
+          ><!-- Password input -->
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            [placeholder]="appStrings?.common?.passwordPlaceHolder"
+            [type]="hide() ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <p class="signup-text">
+          Don't have a seller account ?
+          <a [routerLink]="'/book-owner/signup'">sign up</a> here
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  

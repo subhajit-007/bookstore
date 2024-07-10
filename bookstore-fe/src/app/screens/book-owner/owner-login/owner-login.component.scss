@@ -1,0 +1,50 @@
+:host ::ng-deep {
+    .mat-form-field-appearance-fill {
+      .mdc-text-field--filled {
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+      }
+    }
+  }
+  
+  .auth-card-container {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    padding: 1rem;
+  }
+  
+  mat-label {
+    font-size: 1rem;
+  }
+  
+  mat-card {
+    width: 50%;
+  }
+  
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  
+    mat-form-field {
+      margin-top: 1rem;
+    }
+  }
+  
+  .signup-text {
+    font-size: 0.7rem;
+    color: rgb(173, 173, 65);
+  
+    a {
+      text-decoration: none;
+      color: aquamarine;
+      transition: all 0.3s ease-in-out;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+  

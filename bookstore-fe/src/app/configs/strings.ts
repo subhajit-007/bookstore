@@ -12,9 +12,9 @@ export const STRINGS = {
     passwordPlaceHolder: 'Enter your password',
   },
   customer: {
-    loginHeaderText: 'Login as buyer',
+    loginHeaderText: 'Login as a Buyer',
   },
   bookOwner: {
-    loginHeaderText: 'Login as seller',
+    loginHeaderText: 'Login as a Book Seller',
   },
 };
