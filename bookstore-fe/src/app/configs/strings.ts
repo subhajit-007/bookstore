@@ -1,10 +1,20 @@
 export const STRINGS = {
   common: {
-    save: "Save",
-    cancel: "Cancel",
-    edit: "Edit",
-    delete: "Delete",
-    ok: "OK",
-    brandName: "Book Store",
+    brandName: 'Book Store',
+    save: 'Save',
+    cancel: 'Cancel',
+    edit: 'Edit',
+    delete: 'Delete',
+    ok: 'OK',
+    login: 'Login',
+    signup: 'Sign up',
+    emailPlaceHolder: 'Enter your email id eg. subha@example.com',
+    passwordPlaceHolder: 'Enter your password',
+  },
+  customer: {
+    loginHeaderText: 'Login as buyer',
+  },
+  bookOwner: {
+    loginHeaderText: 'Login as seller',
   },
 };

@@ -2,25 +2,31 @@
 
 <section class="navbar-container">
   <mat-toolbar color="primary">
-    <a [routerLink]="'/'" class="brand-name"><span>{{ appStrings?.common?.brandName }}</span></a>
-    <span class="spacer"></span>
-    @if (role === "customer") {
-    <mat-form-field class="search-bar" appearance="fill">
-      <input
-        matInput
-        type="text"
-        placeholder="Search books by name, author, genre."
-      />
-      <button matSuffix mat-icon-button aria-label="Search">
-        <mat-icon class="icon-size">search</mat-icon>
-      </button>
-    </mat-form-field>
-    }
-    <span class="spacer"></span>
-    <a mat-button [routerLink]="'/user/login'">Login</a>
-    <button mat-button [routerLink]="'/book-owner/login'">Seller Login</button>
-    @if (isCartVisiable()) {
+    <a [routerLink]="'/'" class="brand-name"
+      ><span>{{ appStrings?.common?.brandName }}</span></a
+    >
+    
+    @if (!isAuthScreen) {
+      <span class="spacer"></span>
+      @if (role === "customer") {
+      <mat-form-field class="search-bar" appearance="fill">
+        <input
+          matInput
+          type="text"
+          placeholder="Search books by name, author, genre."
+        />
+        <button matSuffix mat-icon-button aria-label="Search">
+          <mat-icon class="icon-size">search</mat-icon>
+        </button>
+      </mat-form-field>
+      }
+
+      <span class="spacer"></span>
+      <a mat-button [routerLink]="'/user/login'">Login</a>
+      <button mat-button [routerLink]="'/book-owner/login'">Seller Login</button>
+      @if (isCartVisiable()) {
         <button *ngIf="isCartVisiable" mat-button>Cart</button>
+      }
     }
   </mat-toolbar>
 </section>
