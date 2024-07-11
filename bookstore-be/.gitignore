@@ -1,0 +1,4 @@
+.idea
+djvenv
+**/**/migrations
+**/**/__pycache__
