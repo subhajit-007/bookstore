@@ -14,6 +14,7 @@ export const STRINGS = {
   },
   customer: {
     loginHeaderText: 'Login as a Buyer',
+    signupHeaderText: 'Register as a Buyer',
   },
   bookOwner: {
     loginHeaderText: 'Login as a Book Seller',

@@ -60,6 +60,7 @@ export class CustomerLoginComponent {
       password: this.password?.value,
     };
     console.log(payload)
+    this.loginForm.reset()
     // this.customerAuthService.login(payload).subscribe(
     //   (response) => {
     //     localStorage.setItem('access_token', response.access);
