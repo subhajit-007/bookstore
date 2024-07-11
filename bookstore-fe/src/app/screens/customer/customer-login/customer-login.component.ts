@@ -6,10 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { STRINGS } from '../../../configs/strings';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { merge } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { CustomerAuthService } from '../../../services/customer/customer-auth.service';
 
 const MatModules = [
   MatToolbarModule,
@@ -32,29 +31,44 @@ export class CustomerLoginComponent {
   // strings to show in the component
   appStrings: any = STRINGS;
 
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required])
+  })
 
-  errorMessage = signal('');
   hide = signal(true);
 
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
-  }
-
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage.set('You must enter a value');
-    } else if (this.email.hasError('email')) {
-      this.errorMessage.set('Not a valid email');
-    } else {
-      this.errorMessage.set('');
-    }
+  constructor(private customerAuthService: CustomerAuthService) {
   }
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
     event.stopPropagation();
+  }
+
+  get username() {
+    return this.loginForm.get('username')
+  }
+
+  get password() {
+    return this.loginForm.get('password')
+  }
+
+  login() {
+    const payload = {
+      username: this.username?.value ?? '',
+      password: this.password?.value,
+    };
+    console.log(payload)
+    // this.customerAuthService.login(payload).subscribe(
+    //   (response) => {
+    //     localStorage.setItem('access_token', response.access);
+    //     localStorage.setItem('refresh_token', response.refresh);
+    //     console.log('Logged in successfully');
+    //   },
+    //   (error) => {
+    //     console.error('Login failed', error);
+    //   }
+    // );
   }
 }

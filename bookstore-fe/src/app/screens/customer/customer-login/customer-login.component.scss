@@ -34,6 +34,11 @@ mat-card {
   flex-direction: column;
   margin-top: 0.5rem;
 
+  form.login-form {
+    display: flex;
+    flex-direction: column;
+  }
+
   mat-form-field {
     margin-top: 1rem;
   }
@@ -42,13 +47,21 @@ mat-card {
 .signup-text {
   font-size: 0.7rem;
   color: rgb(173, 173, 65);
+  display: flex;
+  justify-content: center;
 
   a {
     text-decoration: none;
     color: aquamarine;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
     transition: all 0.3s ease-in-out;
   }
   a:hover {
     text-decoration: underline;
   }
+}
+
+.auth-btn {
+  border-radius: 4px;
 }

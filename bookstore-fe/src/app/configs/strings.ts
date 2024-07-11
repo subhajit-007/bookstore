@@ -10,6 +10,7 @@ export const STRINGS = {
     signup: 'Sign up',
     emailPlaceHolder: 'Enter your email id eg. subha@example.com',
     passwordPlaceHolder: 'Enter your password',
+    usernamePlaceHolder: "Enter your username",
   },
   customer: {
     loginHeaderText: 'Login as a Buyer',
