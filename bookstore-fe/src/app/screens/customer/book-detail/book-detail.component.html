@@ -1,1 +1,37 @@
-<p>book-detail works for {{ bookId }}!</p>
+<section class="book-container">
+  @if (book){
+  <div class="book-details m-2">
+    <div class="images m-2 p-2">
+      <img [src]="book?.thumbnail" alt="{{ book?.title }}" />
+    </div>
+    <mat-card class="book-card m-3 p-2">
+      <mat-card-content class="">
+        <mat-card-title>{{ book?.title }}</mat-card-title>
+        <p class="text-start muted fs-6">- by {{ book?.author }}</p>
+        <p class="text-md-start px-2 fs-6">Rating: {{ book?.rating }} *</p>
+        <p class="text-md-start px-2">
+          Price:
+          <span [class.muted]="!isBookAval()">
+            $ {{ book?.price }}
+            @if (!isBookAval()){
+              <mat-chip class="mx-2">Out of stock</mat-chip>
+            }
+          </span>
+        </p>
+        <p class="text-md-start px-2 fs-6">
+          Book Store: {{ book?.book_store_name }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button class="mx-2" [disabled]="!isBookAval()">
+          Add to Cart
+        </button>
+        <button mat-flat-button class="mx-2" [disabled]="!isBookAval()">
+          Buy Now
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  }
+</section>

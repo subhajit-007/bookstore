@@ -1,0 +1,31 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem;
+  justify-content: center;
+}
+
+.book-card {
+  max-width: 300px;
+  // transform: scale(0.7);
+  transition: all 0.3s ease-in;
+}
+
+.book-card:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  border: 1px solid #eeeeee;
+  box-shadow: 0rem 0rem 1rem 0.2rem rgba(240, 233, 233, 0.2);
+}
+
+.muted {
+  color: rgb(184, 181, 181);
+  // font-size: 0.5rem;
+}
+
+.sub-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
