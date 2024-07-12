@@ -62,15 +62,5 @@ export class CustomerLoginComponent {
     };
     console.log(payload)
     this.loginForm.reset()
-    // this.customerAuthService.login(payload).subscribe(
-    //   (response) => {
-    //     localStorage.setItem('access_token', response.access);
-    //     localStorage.setItem('refresh_token', response.refresh);
-    //     console.log('Logged in successfully');
-    //   },
-    //   (error) => {
-    //     console.error('Login failed', error);
-    //   }
-    // );
   }
 }
