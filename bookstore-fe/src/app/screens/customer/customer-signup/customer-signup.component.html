@@ -74,6 +74,77 @@
           </mat-form-field>
         </div>
 
+        <!-- email input -->
+        <mat-form-field
+          [ngClass]="{
+            'has-error': email?.invalid && (email?.dirty || email?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="email">Email</mat-label>
+          <input
+            matInput
+            id="email"
+            [placeholder]="appStrings?.common?.emailPlaceHolder"
+            formControlName="email"
+            required
+          />
+          @if (email?.invalid && (email?.dirty || email?.touched)) {
+          <mat-error>Must enter an email</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- phone_number input -->
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              phone_number?.invalid &&
+              (phone_number?.dirty || phone_number?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="phone_number">Phone Number</mat-label>
+          <input
+            matInput
+            id="phone_number"
+            [placeholder]="'Please enter a phone number'"
+            formControlName="phone_number"
+            required
+          />
+          @if (signupForm.get('phone_number')?.errors?.['required'] && (phone_number?.dirty ||
+          phone_number?.touched)) {
+          <mat-error>Must enter a phone number</mat-error>
+          } @if (signupForm.get('phone_number')?.errors?.['notNumber']) {
+
+          <mat-error>
+            {{ signupForm.get('phone_number')?.errors?.['notNumber']?.value }}
+            is not a number. Please enter a valid number.
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- address input -->
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              address?.invalid && (address?.dirty || address?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="address">Address</mat-label>
+          <input
+            matInput
+            id="address"
+            [placeholder]="'Please enter a address'"
+            formControlName="address"
+            required
+          />
+          @if (address?.invalid && (address?.dirty || address?.touched)) {
+          <mat-error>Must enter atleast 6 characters long address</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Password field -->
         <mat-form-field
           [ngClass]="{ 'has-error': isPasswordValid() }"
           appearance="outline"

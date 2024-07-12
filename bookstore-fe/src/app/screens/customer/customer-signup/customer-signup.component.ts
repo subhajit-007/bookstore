@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule,
   AbstractControl,
   ValidationErrors,
-  ValidatorFn,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -18,6 +17,8 @@ import { STRINGS } from '../../../configs/strings';
 import { CustomerAuthService } from '../../../services/customer/customer-auth.service';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { numberValidator } from '../../../form-validators/number-validator';
+import { passwordValidator } from '../../../form-validators/password-validator';
 
 const MatModules = [
   MatToolbarModule,
@@ -44,34 +45,15 @@ export class CustomerSignupComponent {
     first_name: new FormControl('', [Validators.required]),
     last_name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone_number: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
+    phone_number: new FormControl('', [Validators.required, numberValidator()]),
+    address: new FormControl('', [Validators.required, Validators.minLength(6)]),
     password: new FormControl('', [
       Validators.required,
-      this.passwordValidator,
+      passwordValidator,
     ]),
   });
 
   hide = signal(true);
-
-  passwordValidator(control: AbstractControl): ValidationErrors | null {
-    const value = control.value;
-
-    if (!value) {
-      return null;
-    }
-
-    const hasUpperCase = /[A-Z]/.test(value);
-    const hasLowerCase = /[a-z]/.test(value);
-    const hasNumeric = /[0-9]/.test(value);
-    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-    const minLength = value.length >= 4;
-
-    const passwordValid =
-      hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && minLength;
-
-    return !passwordValid ? { passwordStrength: true } : null;
-  }
 
   constructor(private customerAuthService: CustomerAuthService) {}
 
@@ -119,6 +101,11 @@ export class CustomerSignupComponent {
   signup() {
     const payload = {
       username: this.username?.value ?? '',
+      first_name: this.first_name?.value ?? "",
+      last_name: this.last_name?.value ?? "",
+      email: this.email?.value ?? "",
+      phone_number: this.phone_number?.value ?? "",
+      address: this.address?.value ?? "",
       password: this.password?.value,
     };
     console.log(payload);
