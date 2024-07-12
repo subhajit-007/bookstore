@@ -7,7 +7,13 @@
     </mat-card-header>
     <mat-card-content class="card-content">
       <form [formGroup]="loginForm" class="auth-form" (ngSubmit)="login()">
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              username?.invalid && (username?.dirty || username?.touched)
+          }"
+          appearance="outline"
+        >
           <!-- username input -->
           <mat-label for="username">username</mat-label>
           <input
@@ -21,7 +27,13 @@
           <mat-error>Must enter an username</mat-error>
           }
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              password?.invalid && (password?.dirty || password?.touched)
+          }"
+          appearance="outline"
+        >
           <mat-label for="password">Password</mat-label>
           <input
             matInput
@@ -48,7 +60,7 @@
         <button
           [disabled]="username?.invalid || password?.invalid"
           type="submit"
-          class="my-2 auth-btn"
+          class="my-3 auth-btn"
           mat-flat-button
         >
           Login

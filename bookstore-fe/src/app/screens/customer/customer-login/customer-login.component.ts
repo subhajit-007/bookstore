@@ -9,6 +9,7 @@ import { STRINGS } from '../../../configs/strings';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CustomerAuthService } from '../../../services/customer/customer-auth.service';
+import { CommonModule } from '@angular/common';
 
 const MatModules = [
   MatToolbarModule,
@@ -23,7 +24,7 @@ const MatModules = [
 @Component({
   selector: 'app-customer-login',
   standalone: true,
-  imports: [...MatModules, ReactiveFormsModule, RouterModule],
+  imports: [...MatModules, ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './customer-login.component.html',
   styleUrl: './customer-login.component.scss',
 })
