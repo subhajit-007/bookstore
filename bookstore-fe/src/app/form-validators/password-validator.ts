@@ -11,7 +11,7 @@ export function passwordValidator(control: AbstractControl): ValidationErrors | 
     const hasLowerCase = /[a-z]/.test(value);
     const hasNumeric = /[0-9]/.test(value);
     const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-    const minLength = value.length >= 4;
+    const minLength = value.length >= 8;
 
     const passwordValid =
       hasUpperCase && hasLowerCase && hasNumeric && hasSpecial && minLength;

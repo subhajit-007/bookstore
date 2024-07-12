@@ -46,11 +46,11 @@ export class CustomerSignupComponent {
     last_name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone_number: new FormControl('', [Validators.required, numberValidator()]),
-    address: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    password: new FormControl('', [
+    address: new FormControl('', [
       Validators.required,
-      passwordValidator,
+      Validators.minLength(6),
     ]),
+    password: new FormControl('', [Validators.required, passwordValidator]),
   });
 
   hide = signal(true);
@@ -77,7 +77,7 @@ export class CustomerSignupComponent {
   get email() {
     return this.signupForm.get('email');
   }
-  
+
   get address() {
     return this.signupForm.get('address');
   }
@@ -101,24 +101,27 @@ export class CustomerSignupComponent {
   signup() {
     const payload = {
       username: this.username?.value ?? '',
-      first_name: this.first_name?.value ?? "",
-      last_name: this.last_name?.value ?? "",
-      email: this.email?.value ?? "",
-      phone_number: this.phone_number?.value ?? "",
-      address: this.address?.value ?? "",
+      first_name: this.first_name?.value ?? '',
+      last_name: this.last_name?.value ?? '',
+      email: this.email?.value ?? '',
+      phone_number: this.phone_number?.value ?? '',
+      address: this.address?.value ?? '',
       password: this.password?.value,
+      role: 3,
     };
     console.log(payload);
-    // this.signupForm.reset()
-    // this.customerAuthService.signup(payload).subscribe(
-    //   (response) => {
-    //     localStorage.setItem('access_token', response.access);
-    //     localStorage.setItem('refresh_token', response.refresh);
-    //     console.log('Logged in successfully');
-    //   },
-    //   (error) => {
-    //     console.error('signup failed', error);
-    //   }
-    // );
+
+    // if (this.signupForm.valid) {
+    //   this.customerAuthService.signup(payload).subscribe({
+    //     next: (response) => {
+    //       console.log('Signup successful -> \n', response);
+    //       console.warn('Signup successful', response);
+    //     },
+    //     error: (error) => {
+    //       console.error('Signup error -> ', error);
+    //     },
+    //     complete: () => console.info('complete'),
+    //   });
+    // }
   }
 }
