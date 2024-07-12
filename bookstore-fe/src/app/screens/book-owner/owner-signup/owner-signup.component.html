@@ -1,1 +1,199 @@
-<p>owner-signup works!</p>
+<section class="auth-card-container">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{
+        appStrings?.bookOwner?.signupHeaderText
+      }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <form [formGroup]="signupForm" class="auth-form" (ngSubmit)="signup()">
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              username?.invalid && (username?.dirty || username?.touched)
+          }"
+          appearance="outline"
+        >
+          <!-- username input -->
+          <mat-label for="username">username</mat-label>
+          <input
+            matInput
+            id="username"
+            [placeholder]="appStrings?.common?.usernamePlaceHolder"
+            formControlName="username"
+            required
+          />
+          @if (username?.invalid && (username?.dirty || username?.touched)) {
+          <mat-error>Must enter an username</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="name-container">
+          <mat-form-field
+            [ngClass]="{
+              'has-error':
+                first_name?.invalid &&
+                (first_name?.dirty || first_name?.touched)
+            }"
+            appearance="outline"
+          >
+            <!-- first_name input -->
+            <mat-label for="first_name">First Name</mat-label>
+            <input
+              matInput
+              id="first_name"
+              [placeholder]="'Enter your first name'"
+              formControlName="first_name"
+              required
+            />
+            @if (first_name?.invalid && (first_name?.dirty ||
+            first_name?.touched)) {
+            <mat-error>Must enter a first name</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field
+            [ngClass]="{
+              'has-error':
+                last_name?.invalid && (last_name?.dirty || last_name?.touched)
+            }"
+            appearance="outline"
+          >
+            <!-- last_name input -->
+            <mat-label for="last_name">Last Name</mat-label>
+            <input
+              matInput
+              id="last_name"
+              [placeholder]="'Enter your last name'"
+              formControlName="last_name"
+              required
+            />
+            @if (last_name?.invalid && (last_name?.dirty || last_name?.touched))
+            {
+            <mat-error>Must enter a last name</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- email input -->
+        <mat-form-field
+          [ngClass]="{
+            'has-error': email?.invalid && (email?.dirty || email?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="email">Email</mat-label>
+          <input
+            matInput
+            id="email"
+            [placeholder]="appStrings?.common?.emailPlaceHolder"
+            formControlName="email"
+            required
+          />
+          @if (email?.invalid && (email?.dirty || email?.touched)) {
+          <mat-error>Must enter an email</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- phone_number input -->
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              phone_number?.invalid &&
+              (phone_number?.dirty || phone_number?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="phone_number">Phone Number</mat-label>
+          <input
+            matInput
+            id="phone_number"
+            [placeholder]="'Please enter a phone number'"
+            formControlName="phone_number"
+            required
+          />
+          @if (signupForm.get('phone_number')?.errors?.['required'] &&
+          (phone_number?.dirty || phone_number?.touched)) {
+          <mat-error>Must enter a phone number</mat-error>
+          } @if (signupForm.get('phone_number')?.errors?.['notNumber']) {
+
+          <mat-error>
+            {{ signupForm.get('phone_number')?.errors?.['notNumber']?.value }}
+            is not a number. Please enter a valid number.
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <!-- address input -->
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              address?.invalid && (address?.dirty || address?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="address">Address</mat-label>
+          <input
+            matInput
+            id="address"
+            [placeholder]="'Please enter a address'"
+            formControlName="address"
+            required
+          />
+          @if (address?.invalid && (address?.dirty || address?.touched)) {
+          <mat-error>Must enter atleast 6 characters long address</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Password field -->
+        <mat-form-field
+          [ngClass]="{ 'has-error': isPasswordValid() }"
+          appearance="outline"
+        >
+          <mat-label for="password">Password</mat-label>
+          <input
+            matInput
+            id="password"
+            [placeholder]="appStrings?.common?.passwordPlaceHolder"
+            formControlName="password"
+            [type]="hide() ? 'password' : 'text'"
+            required
+          />
+          @if (signupForm.get('password')?.errors?.['required'] &&
+          (password?.dirty || password?.touched)) {
+          <mat-error>Must enter a password</mat-error>
+          } @if (signupForm.get('password')?.errors?.['passwordStrength']) {
+
+          <mat-error>
+            <p class="mb-1">Must be at least 8 characters long</p>
+            <p class="mb-1">
+              Must contain uppercase, lowercase, numeric, and special characters
+            </p>
+          </mat-error>
+          }
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="clickEvent($event)"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide()"
+          >
+            <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button
+          [disabled]="username?.invalid || password?.invalid"
+          type="submit"
+          class="my-2 auth-btn"
+          mat-flat-button
+        >
+          signup
+        </button>
+      </form>
+      <p class="signup-text">
+        Already have a seller account ?
+        <a [routerLink]="'/book-owner/login'">sign in</a> here
+      </p>
+    </mat-card-content>
+  </mat-card>
+</section>
