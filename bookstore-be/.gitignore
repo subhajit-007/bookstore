@@ -2,3 +2,5 @@
 djvenv
 **/**/migrations
 **/**/__pycache__
+bookstoreBackEnd
+.env
