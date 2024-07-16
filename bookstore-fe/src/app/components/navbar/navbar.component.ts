@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { CustomerAuthService } from '../../services/customer/customer-auth.service';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 const MatModules = [
   MatToolbarModule,
@@ -32,7 +34,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   isAuthScreen: boolean = false;
 
-  constructor(private router: Router, private changes: ChangeDetectorRef) {}
+  isUserLoggedIn$: Observable<boolean> = of(false);
+
+  constructor(private router: Router, private changes: ChangeDetectorRef, private customerAuthService: CustomerAuthService) {}
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -40,6 +44,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         this.checkIfAuthScreen(event.urlAfterRedirects);
       }
     });
+    this.isLoggedIn();
   }
 
   ngAfterViewInit(): void {
@@ -54,12 +59,32 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   // Checks user logged in or not
-  isLoggedIn(): boolean {
-    return false;
+  isLoggedIn(): void {
+    this.isUserLoggedIn$ = this.customerAuthService.isLoggedIn();
+    console.log('Change detected from Component 2');
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem("Authorization");
+  }
+
+  logout() {
+    // alert("Logout clicked")
+    this.customerAuthService.logout().subscribe({
+        next: (res: any) => {
+          console.log("Logout response => \n", res)
+          this.isLoggedIn()
+          alert("Successfully Logout")
+        },
+        error: (err: any) => {
+          console.log("Logout error => \n",err)
+        }
+      }
+    )
   }
 
   // if user is "customer" and logged in then only show cart option
   isCartVisiable(): boolean {
-    return this.role === 'customer' && this.isLoggedIn();
+    return this.role === 'customer' && false;
   }
 }

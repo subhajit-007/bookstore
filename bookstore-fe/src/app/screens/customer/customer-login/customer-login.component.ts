@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { STRINGS } from '../../../configs/strings';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CustomerAuthService } from '../../../services/customer/customer-auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -39,7 +39,7 @@ export class CustomerLoginComponent {
 
   hide = signal(true);
 
-  constructor(private customerAuthService: CustomerAuthService) {
+  constructor(private customerAuthService: CustomerAuthService, private router: Router) {
   }
 
   clickEvent(event: MouseEvent) {
@@ -61,6 +61,16 @@ export class CustomerLoginComponent {
       password: this.password?.value,
     };
     console.log(payload)
-    this.loginForm.reset()
+    // this.loginForm.reset()
+    this.customerAuthService.login(payload).subscribe({
+      next: (res) => {
+        console.log("Res from api ===> \n", res)
+        localStorage.setItem('Authorization', `Token ${res?.token}`)
+        
+        alert("Login Successfull.")
+      },
+      error: (err) => {console.log("Error while login: ", err)},
+      complete: () => this.router.navigate(["/"])
+    })
   }
 }

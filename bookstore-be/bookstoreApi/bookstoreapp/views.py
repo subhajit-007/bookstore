@@ -89,8 +89,14 @@ class UserLogoutView(APIView):
         token_key = request.auth.key
         token = Token.objects.get(key=token_key)
         token.delete()
-
         return Response({'detail': 'Successfully logged out.'})
+
+
+class TokenVerifyView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"detail": "Token is valid"}, status=status.HTTP_200_OK)
 
 
 class CustomerListView(APIView):

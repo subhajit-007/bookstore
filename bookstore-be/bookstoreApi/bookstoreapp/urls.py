@@ -20,4 +20,5 @@ urlpatterns = [
     path('customer/signup/', views.CustomerRegistrationView.as_view(), name='customer-registration'),
     path('login/', views.UserLoginView.as_view(), name='user-login'),
     path('logout/', views.UserLogoutView.as_view(), name='user-logout'),
+    path('token-verify/', views.TokenVerifyView.as_view(), name='token-verify'),
 ]

@@ -22,10 +22,16 @@
       }
 
       <span class="spacer"></span>
-      <a mat-button [routerLink]="'/user/login'">Login</a>
+      
+      @if (isUserLoggedIn$ | async) {
+        <a mat-button (click)="logout()">Log out</a>
+      } @else {
+        <a mat-button [routerLink]="'/user/login'">Login</a>
+      }
+
       <button mat-button [routerLink]="'/book-owner/login'">Became a Seller</button>
       @if (isCartVisiable()) {
-        <button *ngIf="isCartVisiable" mat-button>Cart</button>
+        <button mat-button>Cart</button>
       }
     }
   </mat-toolbar>
