@@ -25,13 +25,12 @@
       
       @if (isUserLoggedIn$ | async) {
         <a mat-button (click)="logout()">Log out</a>
+        @if (isCartVisiable()) {
+          <button mat-button>Go to Cart</button>
+        }
       } @else {
         <a mat-button [routerLink]="'/user/login'">Login</a>
-      }
-
-      <button mat-button [routerLink]="'/book-owner/login'">Became a Seller</button>
-      @if (isCartVisiable()) {
-        <button mat-button>Cart</button>
+        <button mat-button [routerLink]="'/book-owner/login'">Became a Seller</button>
       }
     }
   </mat-toolbar>

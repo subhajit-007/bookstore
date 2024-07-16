@@ -61,16 +61,14 @@ export class CustomerLoginComponent {
       password: this.password?.value,
     };
     console.log(payload)
-    // this.loginForm.reset()
     this.customerAuthService.login(payload).subscribe({
       next: (res) => {
         console.log("Res from api ===> \n", res)
         localStorage.setItem('Authorization', `Token ${res?.token}`)
-        
         alert("Login Successfull.")
+        this.router.navigate(["/"])
       },
-      error: (err) => {console.log("Error while login: ", err)},
-      complete: () => this.router.navigate(["/"])
+      error: (err) => {alert(err.error.message)}
     })
   }
 }

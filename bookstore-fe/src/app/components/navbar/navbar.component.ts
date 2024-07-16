@@ -8,7 +8,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { CustomerAuthService } from '../../services/customer/customer-auth.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 const MatModules = [
   MatToolbarModule,
@@ -61,7 +61,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   // Checks user logged in or not
   isLoggedIn(): void {
     this.isUserLoggedIn$ = this.customerAuthService.isLoggedIn();
-    console.log('Change detected from Component 2');
   }
 
   getToken(): string | null {
@@ -69,11 +68,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   logout() {
-    // alert("Logout clicked")
     this.customerAuthService.logout().subscribe({
         next: (res: any) => {
           console.log("Logout response => \n", res)
-          this.isLoggedIn()
           alert("Successfully Logout")
         },
         error: (err: any) => {
@@ -85,6 +82,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   // if user is "customer" and logged in then only show cart option
   isCartVisiable(): boolean {
-    return this.role === 'customer' && false;
+    return this.role === 'customer';
   }
 }
