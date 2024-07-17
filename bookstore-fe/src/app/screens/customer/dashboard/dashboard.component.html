@@ -1,12 +1,4 @@
-<!-- <ul>
-  <li><a [routerLink]="['../book-detail', '1']">book detail</a></li>
-  <li><a [routerLink]="'../orders'">Order list</a></li>
-  <li><a [routerLink]="['../order-detail', '1']">order detail</a></li>
-  <li><a [routerLink]="'../login'">customer login</a></li>
-  <li><a [routerLink]="'../signup'">customer Signup</a></li>
-</ul> -->
-
-<!-- src/app/dashboard/dashboard.component.html -->
+<!-- Customer Dashboard template showing list of books -->
 <section class="card-container">
   @for (book of books; track book.id) {
   <mat-card class="book-card" (click)="goToBookDetail(book?.id)">
@@ -22,6 +14,5 @@
         <button mat-button>SHARE</button> -->
     </mat-card-actions>
   </mat-card>
-
   }
 </section>

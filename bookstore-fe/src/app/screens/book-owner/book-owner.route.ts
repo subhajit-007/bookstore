@@ -17,6 +17,13 @@ export const BOOK_OWNER_ROUTE: Route[] = [
       ),
   },
   {
+    path: 'add-book',
+    loadComponent: () =>
+      import('./add-book/add-book.component').then(
+        (comp) => comp.AddBookComponent
+      ),
+  },
+  {
     path: 'login',
     loadComponent: () =>
       import('./owner-login/owner-login.component').then(

@@ -12,10 +12,8 @@ import { MatLabel, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { STRINGS } from '../../../configs/strings';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { merge } from 'rxjs';
 import { BookOwnerAuthService } from '../../../services/book-owner/book-owner-auth.service';
 
 const MatModules = [
@@ -46,7 +44,7 @@ export class OwnerLoginComponent {
 
   hide = signal(true);
 
-  constructor(private bookOwnerAuthService: BookOwnerAuthService) {}
+  constructor(private bookOwnerAuthService: BookOwnerAuthService, private router: Router) {}
 
   clickEvent(event: MouseEvent) {
     this.hide.set(!this.hide());
@@ -67,6 +65,15 @@ export class OwnerLoginComponent {
       password: this.password?.value,
     };
     console.log(payload);
-    this.loginForm.reset();
+    this.bookOwnerAuthService.login(payload).subscribe({
+      next: (res) => {
+        // console.log("Res from api ===> \n", res)
+        localStorage.setItem('Authorization', `Token ${res?.token}`)
+        localStorage.setItem('user_data', {"id": res?.data?.id, ...res?.data?.user})
+        alert("Login Successfull.")
+        this.router.navigate(["/book-owner"])
+      },
+      error: (err) => {alert(err.error.message)}
+    })
   }
 }

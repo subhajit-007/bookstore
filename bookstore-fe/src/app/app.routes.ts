@@ -4,7 +4,7 @@ import { CustomerComponent } from './screens/customer/customer.component';
 import { BookOwnerComponent } from './screens/book-owner/book-owner.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'user', pathMatch: 'full' },
+  { path: '', redirectTo: 'book-owner', pathMatch: 'full' },
   {
     path: 'user',
     component: CustomerComponent,

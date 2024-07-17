@@ -7,6 +7,7 @@ from rest_framework.response import Response
 
 from .models import Book
 from .serializers import BookSerializers
+from bookstoreapp.models import BookOwner
 
 
 class BooksListView(APIView):
@@ -19,8 +20,7 @@ class BooksListView(APIView):
 class BooksView(APIView):
     def post(self, request):
         book_data = json.loads(request.body)
-        print("book_data ==> ", book_data)
-        serializer = BookSerializers(data=book_data)
+        serializer = BookSerializers(data=book_data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

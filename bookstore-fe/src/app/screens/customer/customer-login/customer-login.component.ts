@@ -65,6 +65,7 @@ export class CustomerLoginComponent {
       next: (res) => {
         console.log("Res from api ===> \n", res)
         localStorage.setItem('Authorization', `Token ${res?.token}`)
+        localStorage.setItem('role', `${res?.role}`)
         alert("Login Successfull.")
         this.router.navigate(["/"])
       },

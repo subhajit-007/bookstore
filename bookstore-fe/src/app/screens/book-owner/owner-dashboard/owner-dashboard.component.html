@@ -1,6 +1,33 @@
-<ul>
+<!-- <ul>
   <li><a [routerLink]="'../dashboard'">dashboard</a></li>
   <li><a [routerLink]="['../manage-order', '1']">Manage Order</a></li>
-  <li><a [routerLink]="'../login'">owner login</a></li>
-  <li><a [routerLink]="'../signup'">owner Signup</a></li>
-</ul>
+</ul> -->
+<section class="dashboard-container">
+  <section class="left-panel">
+    <mat-list class="p-0" role="list">
+      <mat-list-item routerLinkActive="active" class="list-item" role="listitem"
+        ><a [routerLink]="'../add-book'">Add New Book</a></mat-list-item
+      >
+      <mat-list-item routerLinkActive="active" class="list-item" role="listitem"
+        ><a [routerLink]="'../add-book'">Manage Orders</a></mat-list-item
+      >
+    </mat-list>
+  </section>
+  <section class="right-panel">
+    <div class="card-container">
+      @for (book of books; track book.id) {
+      <mat-card class="book-card" (click)="goToBookDetail(book?.id)">
+        <img mat-card-image [src]="book.thumbnail" alt="{{ book.title }}" />
+        <mat-card-content class="mt-2">
+          <mat-card-title>{{ book?.title }}</mat-card-title>
+          <p class="text-start muted fs-6">{{ book?.author }}</p>
+        </mat-card-content>
+        <mat-card-actions class="sub-content">
+          <p class="text-md-start px-2 fs-6">{{ book?.rating }} *</p>
+          <p class="text-md-start px-2 fs-6">$ {{ book?.price }}</p>
+        </mat-card-actions>
+      </mat-card>
+      }
+    </div>
+  </section>
+</section>

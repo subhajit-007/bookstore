@@ -1,0 +1,122 @@
+<section class="auth-card-container">
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{
+        appStrings?.bookOwner?.addNewBookHeaderText
+      }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <form
+        [formGroup]="bookEntryForm"
+        class="auth-form"
+        (ngSubmit)="addBook()"
+      >
+        <mat-form-field
+          [ngClass]="{
+            'has-error': title?.invalid && (title?.dirty || title?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="title">Book Title</mat-label>
+          <input
+            matInput
+            id="title"
+            [placeholder]="'Enter book title or book name'"
+            formControlName="title"
+            required
+          />
+          @if (title?.invalid && (title?.dirty || title?.touched)) {
+          <mat-error>Must enter an book title</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field
+          [ngClass]="{
+            'has-error': author?.invalid && (author?.dirty || author?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="author">Author</mat-label>
+          <input
+            matInput
+            id="author"
+            [placeholder]="'Enter book author name'"
+            formControlName="author"
+          />
+          @if (author?.invalid && (author?.dirty || author?.touched)) {
+          <mat-error>Must enter a valid author name</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field
+          [ngClass]="{
+            'has-error': price?.invalid && (price?.dirty || price?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="price">Price</mat-label>
+          <input
+            matInput
+            id="price"
+            [placeholder]="'Enter book price'"
+            formControlName="price"
+            required
+          />
+          @if (price?.invalid && (price?.dirty || price?.touched)) {
+          <mat-error>Must enter a book price</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              thumbnail?.invalid && (thumbnail?.dirty || thumbnail?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="thumbnail">Book Photo url</mat-label>
+          <input
+            matInput
+            id="thumbnail"
+            [placeholder]="'Enter book photo url'"
+            formControlName="thumbnail"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          [ngClass]="{
+            'has-error':
+              quantity_aval?.invalid &&
+              (quantity_aval?.dirty || quantity_aval?.touched)
+          }"
+          appearance="outline"
+        >
+          <mat-label for="quantity_aval">Book Quantity Avaliable</mat-label>
+          <input
+            matInput
+            id="quantity_aval"
+            [placeholder]="'Enter book quantity avaliable'"
+            formControlName="quantity_aval"
+            required
+          />
+          @if (quantity_aval?.invalid && (quantity_aval?.dirty || quantity_aval?.touched)) {
+          <mat-error>Must enter a valid book quantity</mat-error>
+          }
+        </mat-form-field>
+
+        <button
+          [disabled]="bookEntryForm.invalid"
+          type="submit"
+          class="my-3 auth-btn"
+          mat-flat-button
+        >
+          Add New Book
+        </button>
+      </form>
+      <!-- <p class="signup-text">
+        Don't have a seller account ?
+        <a [routerLink]="'/book-owner/signup'">sign up</a> here
+      </p> -->
+    </mat-card-content>
+  </mat-card>
+</section>
