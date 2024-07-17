@@ -50,8 +50,6 @@ export class AddBookComponent implements OnInit {
     book_owner: new FormControl({}, []),
   });
 
-  // hide = signal(true);
-
   constructor(
     private bookOwnerAuthService: BookOwnerAuthService,
     private booksService: BooksService,
@@ -61,23 +59,16 @@ export class AddBookComponent implements OnInit {
   ngOnInit(): void {
     this.bookOwnerAuthService.getBookOwner().subscribe({
       next: (res) => {
-        // console.log(res);
         this.user_data = {
           id: res?.data?.id ?? '',
           ...res.data.attributes,
         };
-        console.log(this.user_data);
       },
       error: (error) => {
         console.log(error);
       },
     });
   }
-
-  // clickEvent(event: MouseEvent) {
-  //   this.hide.set(!this.hide());
-  //   event.stopPropagation();
-  // }
 
   get title() {
     return this.bookEntryForm.get('title');

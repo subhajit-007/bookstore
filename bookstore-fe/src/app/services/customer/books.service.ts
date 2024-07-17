@@ -20,8 +20,16 @@ export class BooksService {
   mockData : any[] = MOCK_BOOK_DATA
   mockBookOwnerData : any[] = MOCK_BOOK_OWNER_DATA
 
-  getBooks(): Observable<any[]> {
-    return of(this.mockData);
+  getBooks(): Observable<any> {
+    return new Observable(observer => {
+      this.axiosService.get('/book/list/').then(response => {
+        observer.next(response.data);
+        observer.complete();
+      }).catch(error => {
+        observer.error(error);
+      });
+    });
+    // return of(this.mockData);
   }
 
   getBookById(bookId: string): Observable<any> {

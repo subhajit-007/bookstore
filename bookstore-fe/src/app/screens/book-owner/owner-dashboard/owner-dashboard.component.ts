@@ -38,11 +38,34 @@ const MatModules = [
 export class OwnerDashboardComponent implements OnInit {
   books: any[] = [];
 
+  private defaultThumbnailUrl: string =
+    'http://dummyimage.com/332x377.png/dddddd/000000';
+
   constructor(private bookService: BooksService, private router: Router) {}
 
   ngOnInit(): void {
-    this.bookService.getBooks().subscribe((data: any[]) => {
-      this.books = data;
+    this.bookService.getBooks().subscribe({
+      next: (res) => {
+        console.log(res.data);
+        this.books = res?.data?.map((item: any) => ({
+          id: parseInt(item.id, 10),
+          book_store_id: parseInt(item.relationships.book_owner.data.id, 10),
+          title: item.attributes.title,
+          author: item.attributes.author,
+          price: parseFloat(item.attributes.price),
+          rating: parseInt(item.attributes.rating, 10),
+          thumbnail:
+            item.attributes.thumbnail.length < 1
+              ? this.defaultThumbnailUrl
+              : item.attributes.thumbnail,
+          quantity_aval: parseInt(item.attributes.quantity_aval, 10),
+          book_owner: { ...item.relationships.book_owner.data },
+        }));
+        console.log(this.books);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
