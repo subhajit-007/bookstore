@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'bookstoreapp',
     'booksapp',
+    'bookordersapp',
 ]
 
 MIDDLEWARE = [

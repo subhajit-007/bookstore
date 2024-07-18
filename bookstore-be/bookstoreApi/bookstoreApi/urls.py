@@ -11,5 +11,6 @@ urlpatterns += [
     path('admin/', admin.site.urls),
     # path('api-token-auth/', obtain_auth_token),  # gives access to token auth
     path('api/', include('bookstoreapp.urls')),
-    path('api/book/', include('booksapp.urls'))
+    path('api/book/', include('booksapp.urls')),
+    path('api/orders/', include('bookordersapp.urls')),
 ]

@@ -59,3 +59,4 @@ class CustomerSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+

@@ -1,8 +1,6 @@
 from rest_framework import serializers
-from django.shortcuts import get_object_or_404
 
 from .models import Book
-from bookstoreapp.models import BookOwner, User
 from bookstoreapp.serializers import BookOwnerSerializer
 
 
