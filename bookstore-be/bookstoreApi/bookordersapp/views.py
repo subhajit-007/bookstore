@@ -78,24 +78,25 @@ class OrderDetailAPIView(APIView):
 class OrderManageAPIView(APIView):
     permission_classes = [IsBookOwner]
 
-    def get_object(self, pk):
+    def get(self, request, pk):
         try:
-            return Order.objects.get(pk=pk)
-        except Order.DoesNotExist:
-            return None
-
-    def patch(self, request, pk):
-        user = request.user
-        order = self.get_object(pk)
-        if order is None:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        if order.book.book_owner.user != user:
-            return Response({"detail": "Not authorized to manage this order."}, status=status.HTTP_403_FORBIDDEN)
-        serializer = OrderCreateSerializer(order, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+            order = Order.objects.get(pk=pk, book__book_owner__user=request.user)
+            serializer = OrderSerializer(order)
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Order.DoesNotExist:
+            return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    def put(self, request, pk):
+        try:
+            order = Order.objects.get(pk=pk, book__book_owner__user=request.user)
+            serializer = OrderSerializer(order, data=json.loads(request.body), partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                print("update completed")
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Order.DoesNotExist:
+            return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
 
 
 class ActiveOrderListAPIView(APIView):

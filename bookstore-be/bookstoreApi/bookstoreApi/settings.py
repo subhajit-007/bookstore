@@ -173,13 +173,14 @@ CORS_ALLOW_CREDENTIALS = True
 #     'x-requested-with',
 # ]
 
-CORS_ALLOW_METHODS = (
-    "DELETE",
-    "GET",
-    "POST",
-    "PUT",
-)
-
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT'
+]
 
 
 # Internationalization

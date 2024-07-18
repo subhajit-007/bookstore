@@ -7,13 +7,19 @@ from booksapp.serializers import BookSerializers
 
 # Orders Serializers
 class OrderSerializer(serializers.ModelSerializer):
-    customer = CustomerSerializer()
-    book = BookSerializers()
+    customer = CustomerSerializer
+    book = BookSerializers
 
     class Meta:
         model = Order
         fields = '__all__'
-        read_only_fields = ('customer', 'status')
+        read_only_fields = ('id', 'created_at', 'customer')
+
+    def update(self, instance, validated_data):
+        print("updating an order...")
+        instance.status = validated_data.get('status', instance.status)
+        instance.save()
+        return instance
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
