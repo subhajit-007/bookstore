@@ -10,7 +10,14 @@ export const BOOK_OWNER_ROUTE: Route[] = [
       ),
   },
   {
-    path: 'manage-order/:orderId',
+    path: 'manage-orders',
+    loadComponent: () =>
+      import('./orders-list/orders-list.component').then(
+        (comp) => comp.OrdersListComponent
+      ),
+  },
+  {
+    path: ':orderId/manage',
     loadComponent: () =>
       import('./manage-order/manage-order.component').then(
         (comp) => comp.ManageOrderComponent

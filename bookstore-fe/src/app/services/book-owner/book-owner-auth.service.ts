@@ -67,6 +67,17 @@ export class BookOwnerAuthService {
     });
   }
 
+  getOrders(): Observable<any> {
+    return new Observable(observer => {
+      this.axiosService.get('/orders/').then(response => {
+        observer.next(response.data);
+        observer.complete();
+      }).catch(error => {
+        observer.error(error);
+      });
+    });
+  }
+
   private checkTokenValidity(token: string): Promise<any> {
     return this.axiosService.get(`/token-verify/`)
   }

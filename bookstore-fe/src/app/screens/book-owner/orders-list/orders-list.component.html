@@ -1,0 +1,19 @@
+<section class="container-fluid">
+    <section class="content">
+        <mat-list *ngIf="orders.length > 0; else noOrdersFoundTemplate" class="list-container">
+            @for (order of orders; track order.id) {
+            <mat-list-item class="order-item" (click)="fetchOrderDetail(order?.id)">
+                <span matListItemTitle>Order ID: {{ order?.id }} Ordered By Customer Id: {{order?.customer}}</span>
+                <span matListItemLine>Order Placed at {{ order?.attributes?.created_at | date : 'EEEE, MMMM d, hh:mm a'}}</span>
+            </mat-list-item>
+            <mat-divider class="my-2"></mat-divider>
+            }
+        </mat-list>
+        <ng-template #noOrdersFoundTemplate>
+            <div class="notFoundContainer">
+                <h6 class="fs-4">No Orders Found</h6>
+                <h6 class="fs-6"><a [routerLink]="'/book-owner'">Go to dashboard</a></h6>
+            </div>
+        </ng-template>
+    </section>
+</section>
